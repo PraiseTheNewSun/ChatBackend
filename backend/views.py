@@ -2,7 +2,7 @@ from rest_framework import status #type: ignore
 from rest_framework.decorators import api_view #type: ignore
 from rest_framework.response import Response #type: ignore
 from .serializers import MessageSerializer, RoomSerializer
-from .models import Message
+from .models import Message, Room
 
 # Create your views here.
 @api_view(['GET', 'POST'])
@@ -22,7 +22,7 @@ def Messages(request):
 @api_view(['GET', 'POST'])    
 def Rooms(request):
     if request.method == 'GET':
-        rooms = Rooms.objects.all()
+        rooms = Room.objects.all()
         serializer = RoomSerializer(rooms, many=True)
         return Response({'data': serializer.data})
     
